@@ -19,7 +19,7 @@ Vagrant.configure("2") do |config|
 
     webvm340.vm.synced_folder "./www", "/var/www/html"
 	
-	  if Vagrant.has_plugin?("vagrant-proxyconf") && PROXY_ENABLE
+    if Vagrant.has_plugin?("vagrant-proxyconf") && PROXY_ENABLE
       webvm340.proxy.http     = PROXY_URL
       webvm340.proxy.https    = PROXY_URL
       webvm340.proxy.no_proxy = "localhost,127.0.0.1"
@@ -42,13 +42,13 @@ Vagrant.configure("2") do |config|
 
     dbvm340.vm.network "private_network", ip: "#{BASE_INT_NETWORK}.11", virtualbox__intnet: "intnet"
 
-	if Vagrant.has_plugin?("vagrant-proxyconf") && PROXY_ENABLE
+    if Vagrant.has_plugin?("vagrant-proxyconf") && PROXY_ENABLE
       dbvm340.proxy.http     = PROXY_URL
       dbvm340.proxy.https    = PROXY_URL
       dbvm340.proxy.no_proxy = "localhost,127.0.0.1"
     end
 	
-	dbvm340.vm.provision "shell", path: "scripts/install_mysql.sh"
+    dbvm340.vm.provision "shell", path: "scripts/install_mysql.sh"
 	
     dbvm340.vm.provider "virtualbox" do |dbvm|
       dbvm.name = "db.m340"
